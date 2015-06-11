@@ -26,7 +26,7 @@
       <CodeComponent name="code">
         <Param name="Begin Experiment" val="&#10;&#10;ISI = 1.5 + 1.5&#10;contrastList =np.linspace(.012,.11,9)&#10;noiseTexture = np.random.rand(512,512)*2.0-1" valType="extendedCode" updates="constant"/>
         <Param name="name" val="code" valType="code" updates="None"/>
-        <Param name="Begin Routine" val="noiseTexture = np.random.rand(512,512)*2.0-1&#10;gC = np.random.choice(contrastList)&#10;gratingColor = [gC, gC, gC]&#10;&#10;if random()&lt;trialPredictability:&#10;&#10;    if thisTrialValue == &quot;A&quot;:&#10;        gratingOri = gratingOriB&#10;        thisTrialValue = &quot;B&quot;&#10;    elif thisTrialValue == &quot;B&quot;:&#10;        gratingOri = gratingOriA&#10;        thisTrialValue = &quot;A&quot;&#10;&#10;ISI = random() + 1 + 1.5&#10;&#10;thisExp.addData('gratingOri', gratingOri)&#10;thisExp.addData('thisTrialValue', thisTrialValue)&#10;thisExp.addData('task',task)&#10;" valType="extendedCode" updates="constant"/>
+        <Param name="Begin Routine" val="noiseTexture = np.random.rand(512,512)*2.0-1&#10;gC = np.random.choice(contrastList)&#10;gratingColor = [gC, gC, gC]&#10;&#10;#determine if this trial should switch&#10;if random()&lt;trialPredictability:&#10;&#10;    if thisTrialValue == &quot;A&quot;:&#10;        gratingOri = gratingOriB&#10;        thisTrialValue = &quot;B&quot;&#10;    elif thisTrialValue == &quot;B&quot;:&#10;        gratingOri = gratingOriA&#10;        thisTrialValue = &quot;A&quot;&#10;&#10;ISI = random() + 1 + 1.5&#10;&#10;if thisTrialValue == &quot;A&quot;:&#10;    if swapResponse:&#10;        correctResponse = &quot;j&quot;&#10;    else:&#10;        correctResponse = &quot;f&quot;&#10;elif thisTrialValue == &quot;B&quot;:&#10;    if swapResponse:&#10;        correctResponse = &quot;f&quot;&#10;    else:&#10;        correctResponse = &quot;j&quot;&#10;&#10;thisExp.addData('gratingOri', gratingOri)&#10;thisExp.addData('thisTrialValue', thisTrialValue)&#10;thisExp.addData('task',task)&#10;thisExp.addData('swapResponse',swapResponse)&#10;thisExp.addData('correctResponse',correctResponse)&#10;&#10;&#10;" valType="extendedCode" updates="constant"/>
         <Param name="End Routine" val="" valType="extendedCode" updates="constant"/>
         <Param name="End Experiment" val="" valType="extendedCode" updates="constant"/>
         <Param name="Each Frame" val="" valType="extendedCode" updates="constant"/>
@@ -69,7 +69,7 @@
         <Param name="size" val="[3.8, 3.8]" valType="code" updates="constant"/>
       </GratingComponent>
       <ImageComponent name="image">
-        <Param name="opacity" val="0" valType="code" updates="constant"/>
+        <Param name="opacity" val=".1" valType="code" updates="constant"/>
         <Param name="flipVert" val="False" valType="bool" updates="constant"/>
         <Param name="colorSpace" val="rgb" valType="str" updates="constant"/>
         <Param name="name" val="image" valType="code" updates="None"/>
@@ -138,15 +138,57 @@
     </Routine>
     <Routine name="Instructions">
       <CodeComponent name="code_3">
-        <Param name="Begin Experiment" val="&#10;&#10;taskText=&quot;notSet&quot;&#10;showBlue = 1&#10;jText = &quot;j=blue&quot;&#10;baseOri = 0&#10;gratingOriA = baseOri-90&#10;gratingOriB = gratingOriA-60&#10;gratingOri  = gratingOriA&#10;thisTrialValue   = &quot;A&quot;&#10;&#10;&#10;if random() &gt; .5:&#10;    task = &quot;AB&quot;&#10;else:&#10;    task = &quot;A_notA&quot;" valType="extendedCode" updates="constant"/>
+        <Param name="Begin Experiment" val="&#10;&#10;taskText=&quot;notSet&quot;&#10;showBlue = 1&#10;showGreen = 1-showBlue&#10;jText = &quot;j=blue&quot;&#10;aText = &quot;f&quot;&#10;bText = &quot;j&quot;&#10;blueText = &quot;j=blue&quot;&#10;&#10;baseOri = 0&#10;gratingOriA = baseOri-90&#10;gratingOriB = gratingOriA-60&#10;gratingOri  = gratingOriA&#10;thisTrialValue   = &quot;A&quot;&#10;redPos  = [2,0]&#10;bluePos = [0,2]&#10;&#10;if random() &gt; .5:&#10;    task = &quot;AB&quot;&#10;else:&#10;    task = &quot;A_notA&quot;" valType="extendedCode" updates="constant"/>
         <Param name="name" val="code_3" valType="code" updates="None"/>
-        <Param name="Begin Routine" val="if task == &quot;AB&quot;:&#10;    task = &quot;A_notA&quot;&#10;else:&#10;    task = &quot;AB&quot;&#10;&#10;baseOri = random()*360&#10;gratingOriA = baseOri-90&#10;gratingOriB = gratingOriA-60&#10;&#10;if random()&gt;.5:&#10;    gratingOri  = gratingOriA&#10;    thisTrialValue   = &quot;A&quot;&#10;else:&#10;    gratingOri  = gratingOriB&#10;    thisTrialValue   = &quot;B&quot;&#10;&#10;if task==&quot;AB&quot;:&#10;    taskText = &quot;Press the &quot;&quot;f&quot;&quot; key if the pattern matches the red line\nPress the &quot;&quot;j&quot;&quot; key if the pattern matches the blue line&quot;&#10;    showBlue = 1&#10;    jText = &quot;j=blue&quot;&#10;elif task==&quot;A_notA&quot;:&#10;    taskText = &quot;Press the &quot;&quot;f&quot;&quot; key is the pattern matches the red line\n Otherwise press the &quot;&quot;j&quot;&quot; &quot;&#10;    showBlue = 0&#10;    jText = &quot;&quot;&#10;" valType="extendedCode" updates="constant"/>
+        <Param name="Begin Routine" val="if task == &quot;AB&quot;:&#10;    task = &quot;A_notA&quot;&#10;else:&#10;    task = &quot;AB&quot;&#10;&#10;baseOri = random()*360&#10;gratingOriA = baseOri-90&#10;gratingOriB = gratingOriA-60&#10;&#10;&#10;redPos = [ 3*sin(deg2rad(gratingOriA)), 3*cos(deg2rad(gratingOriA))] &#10;bluePos = [ 3*sin(deg2rad(gratingOriB)), 3*cos(deg2rad(gratingOriB))] &#10;&#10;#print(redPos)&#10;#print(gratingOriA)&#10;#print(sin(deg2rad(gratingOriA)))&#10;&#10;if random()&gt;.5:&#10;    gratingOri  = gratingOriA&#10;    thisTrialValue   = &quot;A&quot;&#10;else:&#10;    gratingOri  = gratingOriB&#10;    thisTrialValue   = &quot;B&quot;&#10;&#10;if random()&gt;.5:&#10;    swapResponse = False&#10;else:&#10;    swapResponse = True&#10;#swapResponse = True&#10;#print(swapResponse)&#10;&#10;if task==&quot;AB&quot;:&#10;    if swapResponse:&#10;        taskText = &quot;Press the &quot;&quot;j&quot;&quot; key if the pattern matches the red line\nPress the &quot;&quot;f&quot;&quot; key if the pattern matches the blue line&quot;&#10;        showBlue = 1&#10;        jText = &quot;j=blue&quot;&#10;        aText = &quot;j&quot;&#10;        bText = &quot;f&quot;&#10;        print(&quot;swapResponse&quot;)&#10;    else:&#10;        taskText = &quot;Press the &quot;&quot;f&quot;&quot; key if the pattern matches the red line\nPress the &quot;&quot;j&quot;&quot; key if the pattern matches the blue line&quot;&#10;        showBlue = 1&#10;        jText = &quot;j=blue&quot;&#10;        aText = &quot;f&quot;&#10;        bText = &quot;j&quot;&#10;&#10;&#10;elif task==&quot;A_notA&quot;:&#10;    if swapResponse:&#10;        taskText = &quot;Press the &quot;&quot;j&quot;&quot; key is the pattern matches the green line\n            Otherwise press the &quot;&quot;f&quot;&quot; &quot;&#10;        showBlue = 0&#10;        jText = &quot;&quot;&#10;        aText = &quot;j&quot;&#10;        bText = &quot;&quot;&#10;        print(&quot;swapResponse&quot;)&#10;    else:&#10;        taskText = &quot;Press the &quot;&quot;f&quot;&quot; key is the pattern matches the green line\n            Otherwise press the &quot;&quot;j&quot;&quot; &quot;&#10;        showBlue = 0&#10;        jText = &quot;&quot;&#10;        aText = &quot;f&quot;&#10;        bText = &quot;&quot;&#10;    &#10;&#10;showGreen = 1-showBlue&#10;print(taskText)" valType="extendedCode" updates="constant"/>
         <Param name="End Routine" val="" valType="extendedCode" updates="constant"/>
         <Param name="End Experiment" val="" valType="extendedCode" updates="constant"/>
         <Param name="Each Frame" val="" valType="extendedCode" updates="constant"/>
       </CodeComponent>
-      <PolygonComponent name="lineRed">
+      <PolygonComponent name="polygon">
         <Param name="opacity" val="1" valType="code" updates="constant"/>
+        <Param name="fillColorSpace" val="rgb" valType="str" updates="constant"/>
+        <Param name="name" val="polygon" valType="code" updates="None"/>
+        <Param name="fillColor" val="$[-.5,-.5,-.5]" valType="str" updates="constant"/>
+        <Param name="stopVal" val="" valType="code" updates="constant"/>
+        <Param name="durationEstim" val="" valType="code" updates="None"/>
+        <Param name="pos" val="[0, 0]" valType="code" updates="constant"/>
+        <Param name="interpolate" val="linear" valType="str" updates="constant"/>
+        <Param name="lineWidth" val="1" valType="code" updates="constant"/>
+        <Param name="startEstim" val="" valType="code" updates="None"/>
+        <Param name="units" val="from exp settings" valType="str" updates="None"/>
+        <Param name="startType" val="time (s)" valType="str" updates="None"/>
+        <Param name="lineColor" val="$[0,0,0]" valType="str" updates="constant"/>
+        <Param name="ori" val="0" valType="code" updates="constant"/>
+        <Param name="stopType" val="duration (s)" valType="str" updates="None"/>
+        <Param name="startVal" val="0.0" valType="code" updates="None"/>
+        <Param name="lineColorSpace" val="rgb" valType="str" updates="constant"/>
+        <Param name="nVertices" val="90" valType="int" updates="constant"/>
+        <Param name="size" val="[4,4]" valType="code" updates="constant"/>
+      </PolygonComponent>
+      <PolygonComponent name="lineGreen">
+        <Param name="opacity" val="$showGreen" valType="code" updates="set every repeat"/>
+        <Param name="fillColorSpace" val="rgb" valType="str" updates="constant"/>
+        <Param name="name" val="lineGreen" valType="code" updates="None"/>
+        <Param name="fillColor" val="$[-1,1,-1]" valType="str" updates="constant"/>
+        <Param name="stopVal" val="" valType="code" updates="constant"/>
+        <Param name="durationEstim" val="" valType="code" updates="None"/>
+        <Param name="pos" val="[0, 0]" valType="code" updates="constant"/>
+        <Param name="interpolate" val="linear" valType="str" updates="constant"/>
+        <Param name="lineWidth" val="20" valType="code" updates="constant"/>
+        <Param name="startEstim" val="" valType="code" updates="None"/>
+        <Param name="units" val="from exp settings" valType="str" updates="None"/>
+        <Param name="startType" val="time (s)" valType="str" updates="None"/>
+        <Param name="lineColor" val="$[-1,1,-1]" valType="str" updates="constant"/>
+        <Param name="ori" val="$baseOri" valType="code" updates="set every repeat"/>
+        <Param name="stopType" val="duration (s)" valType="str" updates="None"/>
+        <Param name="startVal" val="0.0" valType="code" updates="None"/>
+        <Param name="lineColorSpace" val="rgb" valType="str" updates="constant"/>
+        <Param name="nVertices" val="2" valType="int" updates="constant"/>
+        <Param name="size" val="[4]" valType="code" updates="constant"/>
+      </PolygonComponent>
+      <PolygonComponent name="lineRed">
+        <Param name="opacity" val="$showBlue" valType="code" updates="set every repeat"/>
         <Param name="fillColorSpace" val="rgb" valType="str" updates="constant"/>
         <Param name="name" val="lineRed" valType="code" updates="None"/>
         <Param name="fillColor" val="$[1,-1,-1]" valType="str" updates="constant"/>
@@ -187,16 +229,16 @@
         <Param name="nVertices" val="2" valType="int" updates="constant"/>
         <Param name="size" val="[4]" valType="code" updates="constant"/>
       </PolygonComponent>
-      <TextComponent name="fRed">
+      <TextComponent name="ALabel">
         <Param name="opacity" val="1" valType="code" updates="constant"/>
         <Param name="colorSpace" val="rgb" valType="str" updates="constant"/>
-        <Param name="name" val="fRed" valType="code" updates="None"/>
+        <Param name="name" val="ALabel" valType="code" updates="None"/>
         <Param name="wrapWidth" val="" valType="code" updates="constant"/>
         <Param name="color" val="white" valType="str" updates="constant"/>
-        <Param name="text" val="f=red" valType="str" updates="constant"/>
+        <Param name="text" val="$aText" valType="str" updates="set every repeat"/>
         <Param name="stopVal" val="" valType="code" updates="constant"/>
         <Param name="durationEstim" val="" valType="code" updates="None"/>
-        <Param name="pos" val="[-2.1,1.5]" valType="code" updates="constant"/>
+        <Param name="pos" val="$redPos" valType="code" updates="set every repeat"/>
         <Param name="flip" val="" valType="str" updates="constant"/>
         <Param name="startEstim" val="" valType="code" updates="None"/>
         <Param name="units" val="from exp settings" valType="str" updates="None"/>
@@ -207,16 +249,16 @@
         <Param name="font" val="Arial" valType="str" updates="constant"/>
         <Param name="letterHeight" val="0.5" valType="code" updates="constant"/>
       </TextComponent>
-      <TextComponent name="jBlue">
+      <TextComponent name="BLabel">
         <Param name="opacity" val="1" valType="code" updates="constant"/>
         <Param name="colorSpace" val="rgb" valType="str" updates="constant"/>
-        <Param name="name" val="jBlue" valType="code" updates="None"/>
+        <Param name="name" val="BLabel" valType="code" updates="None"/>
         <Param name="wrapWidth" val="2" valType="code" updates="constant"/>
         <Param name="color" val="white" valType="str" updates="constant"/>
-        <Param name="text" val="$jText" valType="str" updates="set every repeat"/>
+        <Param name="text" val="$bText" valType="str" updates="set every repeat"/>
         <Param name="stopVal" val="" valType="code" updates="constant"/>
         <Param name="durationEstim" val="" valType="code" updates="None"/>
-        <Param name="pos" val="[2.1,1.5]" valType="code" updates="constant"/>
+        <Param name="pos" val="$bluePos" valType="code" updates="set every repeat"/>
         <Param name="flip" val="" valType="str" updates="constant"/>
         <Param name="startEstim" val="" valType="code" updates="None"/>
         <Param name="units" val="from exp settings" valType="str" updates="None"/>
@@ -251,7 +293,7 @@
         <Param name="text" val="$taskText" valType="str" updates="set every repeat"/>
         <Param name="stopVal" val="" valType="code" updates="constant"/>
         <Param name="durationEstim" val="" valType="code" updates="None"/>
-        <Param name="pos" val="[0, 3]" valType="code" updates="constant"/>
+        <Param name="pos" val="[0, 6]" valType="code" updates="constant"/>
         <Param name="flip" val="" valType="str" updates="constant"/>
         <Param name="startEstim" val="" valType="code" updates="None"/>
         <Param name="units" val="from exp settings" valType="str" updates="None"/>
@@ -285,7 +327,7 @@
       <Param name="nReps" val="10" valType="code" updates="None"/>
       <Param name="endPoints" val="[0, 1]" valType="num" updates="None"/>
       <Param name="conditions" val="None" valType="str" updates="None"/>
-      <Param name="Selected rows" val="" valType="code" updates="None"/>
+      <Param name="Selected rows" val="" valType="str" updates="None"/>
     </LoopInitiator>
     <Routine name="Instructions"/>
     <Routine name="Predictability_Instructions"/>

@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy2 Experiment Builder (v1.82.01), Wed May 13 16:21:28 2015
+This experiment was created using PsychoPy2 Experiment Builder (v1.82.01), Thu Jun 11 14:28:20 2015
 If you publish work using this script please cite the relevant PsychoPy publications
   Peirce, JW (2007) PsychoPy - Psychophysics software in Python. Journal of Neuroscience Methods, 162(1-2), 8-13.
   Peirce, JW (2009) Generating stimuli for neuroscience using PsychoPy. Frontiers in Neuroinformatics, 2:10. doi: 10.3389/neuro.11.010.2008
@@ -20,7 +20,7 @@ _thisDir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-expName = 'AP'  # from the Builder filename that created this script
+expName = u'AP'  # from the Builder filename that created this script
 expInfo = {u'session': u'001', u'participant': u''}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False: core.quit()  # user pressed cancel
@@ -33,7 +33,7 @@ filename = _thisDir + os.sep + 'data/%s_%s_%s' %(expInfo['participant'], expName
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath='/Users/ales/psychoPyProjects/pikiou/AP.psyexp',
+    originPath='/Users/ales/git/psychoPyProjects/pikiou/AP.psyexp',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 #save a log file for detail verbose info
@@ -46,7 +46,7 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 
 # Setup the Window
 win = visual.Window(size=(1440, 900), fullscr=True, screen=0, allowGUI=False, allowStencil=False,
-    monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
+    monitor=u'testMonitor', color=[0,0,0], colorSpace='rgb',
     blendMode='avg', useFBO=True,
     )
 # store frame rate of monitor if we can measure it successfully
@@ -62,47 +62,67 @@ InstructionsClock = core.Clock()
 
 taskText="notSet"
 showBlue = 1
+showGreen = 1-showBlue
 jText = "j=blue"
+aText = "f"
+bText = "j"
+blueText = "j=blue"
+
 baseOri = 0
 gratingOriA = baseOri-90
 gratingOriB = gratingOriA-60
 gratingOri  = gratingOriA
 thisTrialValue   = "A"
-
+redPos  = [2,0]
+bluePos = [0,2]
 
 if random() > .5:
     task = "AB"
 else:
     task = "A_notA"
+polygon = visual.Polygon(win=win, name='polygon',
+    edges = 90, size=[4,4],
+    ori=0, pos=[0, 0],
+    lineWidth=1, lineColor=[0,0,0], lineColorSpace='rgb',
+    fillColor=[-.5,-.5,-.5], fillColorSpace='rgb',
+    opacity=1,depth=-1.0, 
+interpolate=True)
+lineGreen = visual.Line(win=win, name='lineGreen',
+    start=(-[4][0]/2.0, 0), end=(+[4][0]/2.0, 0),
+    ori=1.0, pos=[0, 0],
+    lineWidth=20, lineColor=[-1,1,-1], lineColorSpace='rgb',
+    fillColor=[-1,1,-1], fillColorSpace='rgb',
+    opacity=1.0,depth=-2.0, 
+interpolate=True)
 lineRed = visual.Line(win=win, name='lineRed',
     start=(-[4][0]/2.0, 0), end=(+[4][0]/2.0, 0),
     ori=1.0, pos=[0, 0],
     lineWidth=20, lineColor=[1,-1,-1], lineColorSpace='rgb',
     fillColor=[1,-1,-1], fillColorSpace='rgb',
-    opacity=1,depth=-1.0, 
+    opacity=1.0,depth=-3.0, 
 interpolate=True)
 lineBlue = visual.Line(win=win, name='lineBlue',
     start=(-[4][0]/2.0, 0), end=(+[4][0]/2.0, 0),
     ori=1.0, pos=[0, 0],
     lineWidth=20, lineColor=[-1,-1,1], lineColorSpace='rgb',
     fillColor=[-1,-1,1], fillColorSpace='rgb',
-    opacity=1.0,depth=-2.0, 
+    opacity=1.0,depth=-4.0, 
 interpolate=True)
-fRed = visual.TextStim(win=win, ori=0, name='fRed',
-    text='f=red',    font='Arial',
-    pos=[-2.1,1.5], height=0.5, wrapWidth=None,
-    color='white', colorSpace='rgb', opacity=1,
-    depth=-3.0)
-jBlue = visual.TextStim(win=win, ori=0, name='jBlue',
-    text='default text',    font='Arial',
-    pos=[2.1,1.5], height=0.5, wrapWidth=2,
-    color='white', colorSpace='rgb', opacity=1,
-    depth=-4.0)
-instructionText = visual.TextStim(win=win, ori=0, name='instructionText',
+ALabel = visual.TextStim(win=win, ori=0, name='ALabel',
     text='default text',    font=u'Arial',
-    pos=[0, 3], height=0.5, wrapWidth=20,
+    pos=[0,0], height=0.5, wrapWidth=None,
+    color=u'white', colorSpace='rgb', opacity=1,
+    depth=-5.0)
+BLabel = visual.TextStim(win=win, ori=0, name='BLabel',
+    text='default text',    font=u'Arial',
+    pos=[0,0], height=0.5, wrapWidth=2,
     color=u'white', colorSpace='rgb', opacity=1,
     depth=-6.0)
+instructionText = visual.TextStim(win=win, ori=0, name='instructionText',
+    text='default text',    font=u'Arial',
+    pos=[0, 6], height=0.5, wrapWidth=20,
+    color=u'white', colorSpace='rgb', opacity=1,
+    depth=-8.0)
 
 # Initialize components for Routine "Predictability_Instructions"
 Predictability_InstructionsClock = core.Clock()
@@ -128,7 +148,7 @@ grating = visual.GratingStim(win=win, name='grating',
 image = visual.ImageStim(win=win, name='image',
     image='sin', mask=None,
     ori=0, pos=[0, 0], size=[10, 10],
-    color=[1,1,1], colorSpace='rgb', opacity=0,
+    color=[1,1,1], colorSpace='rgb', opacity=.1,
     flipHoriz=False, flipVert=False,
     texRes=128, interpolate=True, depth=-3.0)
 
@@ -138,7 +158,7 @@ routineTimer = core.CountdownTimer()  # to track time remaining of each (non-sli
 
 # set up handler to look after randomisation of conditions etc
 predictabilityBlocks = data.TrialHandler(nReps=1, method='random', 
-    extraInfo=expInfo, originPath='/Users/ales/psychoPyProjects/pikiou/AP.psyexp',
+    extraInfo=expInfo, originPath='/Users/ales/git/psychoPyProjects/pikiou/AP.psyexp',
     trialList=data.importConditions('trialPredictabilityList.xlsx'),
     seed=None, name='predictabilityBlocks')
 thisExp.addLoop(predictabilityBlocks)  # add the loop to the experiment
@@ -157,7 +177,7 @@ for thisPredictabilityBlock in predictabilityBlocks:
     
     # set up handler to look after randomisation of conditions etc
     taskBlocks = data.TrialHandler(nReps=10, method='random', 
-        extraInfo=expInfo, originPath='/Users/ales/psychoPyProjects/pikiou/AP.psyexp',
+        extraInfo=expInfo, originPath='/Users/ales/git/psychoPyProjects/pikiou/AP.psyexp',
         trialList=[None],
         seed=None, name='taskBlocks')
     thisExp.addLoop(taskBlocks)  # add the loop to the experiment
@@ -188,6 +208,14 @@ for thisPredictabilityBlock in predictabilityBlocks:
         gratingOriA = baseOri-90
         gratingOriB = gratingOriA-60
         
+        
+        redPos = [ 3*sin(deg2rad(gratingOriA)), 3*cos(deg2rad(gratingOriA))] 
+        bluePos = [ 3*sin(deg2rad(gratingOriB)), 3*cos(deg2rad(gratingOriB))] 
+        
+        #print(redPos)
+        #print(gratingOriA)
+        #print(sin(deg2rad(gratingOriA)))
+        
         if random()>.5:
             gratingOri  = gratingOriA
             thisTrialValue   = "A"
@@ -195,28 +223,68 @@ for thisPredictabilityBlock in predictabilityBlocks:
             gratingOri  = gratingOriB
             thisTrialValue   = "B"
         
-        if task=="AB":
-            taskText = "Press the ""f"" key if the pattern matches the red line\nPress the ""j"" key if the pattern matches the blue line"
-            showBlue = 1
-            jText = "j=blue"
-        elif task=="A_notA":
-            taskText = "Press the ""f"" key is the pattern matches the red line\n Otherwise press the ""j"" "
-            showBlue = 0
-            jText = ""
+        if random()>.5:
+            swapResponse = False
+        else:
+            swapResponse = True
+        #swapResponse = True
+        #print(swapResponse)
         
+        if task=="AB":
+            if swapResponse:
+                taskText = "Press the ""j"" key if the pattern matches the red line\nPress the ""f"" key if the pattern matches the blue line"
+                showBlue = 1
+                jText = "j=blue"
+                aText = "j"
+                bText = "f"
+                print("swapResponse")
+            else:
+                taskText = "Press the ""f"" key if the pattern matches the red line\nPress the ""j"" key if the pattern matches the blue line"
+                showBlue = 1
+                jText = "j=blue"
+                aText = "f"
+                bText = "j"
+        
+        
+        elif task=="A_notA":
+            if swapResponse:
+                taskText = "Press the ""j"" key is the pattern matches the green line\n            Otherwise press the ""f"" "
+                showBlue = 0
+                jText = ""
+                aText = "j"
+                bText = ""
+                print("swapResponse")
+            else:
+                taskText = "Press the ""f"" key is the pattern matches the green line\n            Otherwise press the ""j"" "
+                showBlue = 0
+                jText = ""
+                aText = "f"
+                bText = ""
+            
+        
+        showGreen = 1-showBlue
+        print(taskText)
+        lineGreen.setOpacity(showGreen)
+        lineGreen.setOri(baseOri)
+        lineRed.setOpacity(showBlue)
         lineRed.setOri(baseOri)
         lineBlue.setOpacity(showBlue)
         lineBlue.setOri(baseOri - 60)
-        jBlue.setText(jText)
+        ALabel.setText(aText)
+        ALabel.setPos(redPos)
+        BLabel.setText(bText)
+        BLabel.setPos(bluePos)
         key_resp_4 = event.BuilderKeyResponse()  # create an object of type KeyResponse
         key_resp_4.status = NOT_STARTED
         instructionText.setText(taskText)
         # keep track of which components have finished
         InstructionsComponents = []
+        InstructionsComponents.append(polygon)
+        InstructionsComponents.append(lineGreen)
         InstructionsComponents.append(lineRed)
         InstructionsComponents.append(lineBlue)
-        InstructionsComponents.append(fRed)
-        InstructionsComponents.append(jBlue)
+        InstructionsComponents.append(ALabel)
+        InstructionsComponents.append(BLabel)
         InstructionsComponents.append(key_resp_4)
         InstructionsComponents.append(instructionText)
         for thisComponent in InstructionsComponents:
@@ -232,6 +300,20 @@ for thisPredictabilityBlock in predictabilityBlocks:
             # update/draw components on each frame
             
             
+            # *polygon* updates
+            if t >= 0.0 and polygon.status == NOT_STARTED:
+                # keep track of start time/frame for later
+                polygon.tStart = t  # underestimates by a little under one frame
+                polygon.frameNStart = frameN  # exact frame index
+                polygon.setAutoDraw(True)
+            
+            # *lineGreen* updates
+            if t >= 0.0 and lineGreen.status == NOT_STARTED:
+                # keep track of start time/frame for later
+                lineGreen.tStart = t  # underestimates by a little under one frame
+                lineGreen.frameNStart = frameN  # exact frame index
+                lineGreen.setAutoDraw(True)
+            
             # *lineRed* updates
             if t >= 0.0 and lineRed.status == NOT_STARTED:
                 # keep track of start time/frame for later
@@ -246,19 +328,19 @@ for thisPredictabilityBlock in predictabilityBlocks:
                 lineBlue.frameNStart = frameN  # exact frame index
                 lineBlue.setAutoDraw(True)
             
-            # *fRed* updates
-            if t >= 0.0 and fRed.status == NOT_STARTED:
+            # *ALabel* updates
+            if t >= 0.0 and ALabel.status == NOT_STARTED:
                 # keep track of start time/frame for later
-                fRed.tStart = t  # underestimates by a little under one frame
-                fRed.frameNStart = frameN  # exact frame index
-                fRed.setAutoDraw(True)
+                ALabel.tStart = t  # underestimates by a little under one frame
+                ALabel.frameNStart = frameN  # exact frame index
+                ALabel.setAutoDraw(True)
             
-            # *jBlue* updates
-            if t >= 0.0 and jBlue.status == NOT_STARTED:
+            # *BLabel* updates
+            if t >= 0.0 and BLabel.status == NOT_STARTED:
                 # keep track of start time/frame for later
-                jBlue.tStart = t  # underestimates by a little under one frame
-                jBlue.frameNStart = frameN  # exact frame index
-                jBlue.setAutoDraw(True)
+                BLabel.tStart = t  # underestimates by a little under one frame
+                BLabel.frameNStart = frameN  # exact frame index
+                BLabel.setAutoDraw(True)
             
             # *key_resp_4* updates
             if t >= 0.0 and key_resp_4.status == NOT_STARTED:
@@ -394,7 +476,7 @@ for thisPredictabilityBlock in predictabilityBlocks:
         
         # set up handler to look after randomisation of conditions etc
         targetRandomization = data.TrialHandler(nReps=4, method='random', 
-            extraInfo=expInfo, originPath='/Users/ales/psychoPyProjects/pikiou/AP.psyexp',
+            extraInfo=expInfo, originPath='/Users/ales/git/psychoPyProjects/pikiou/AP.psyexp',
             trialList=[None],
             seed=None, name='targetRandomization')
         thisExp.addLoop(targetRandomization)  # add the loop to the experiment
@@ -420,6 +502,7 @@ for thisPredictabilityBlock in predictabilityBlocks:
             gC = np.random.choice(contrastList)
             gratingColor = [gC, gC, gC]
             
+            #determine if this trial should switch
             if random()<trialPredictability:
             
                 if thisTrialValue == "A":
@@ -431,9 +514,24 @@ for thisPredictabilityBlock in predictabilityBlocks:
             
             ISI = random() + 1 + 1.5
             
+            if thisTrialValue == "A":
+                if swapResponse:
+                    correctResponse = "j"
+                else:
+                    correctResponse = "f"
+            elif thisTrialValue == "B":
+                if swapResponse:
+                    correctResponse = "f"
+                else:
+                    correctResponse = "j"
+            
             thisExp.addData('gratingOri', gratingOri)
             thisExp.addData('thisTrialValue', thisTrialValue)
             thisExp.addData('task',task)
+            thisExp.addData('swapResponse',swapResponse)
+            thisExp.addData('correctResponse',correctResponse)
+            
+            
             
             gabor_response = event.BuilderKeyResponse()  # create an object of type KeyResponse
             gabor_response.status = NOT_STARTED
