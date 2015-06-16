@@ -13,7 +13,7 @@
     <Param name="Show info dlg" val="True" valType="bool" updates="None"/>
     <Param name="Save wide csv file" val="True" valType="bool" updates="None"/>
     <Param name="Save psydat file" val="True" valType="bool" updates="None"/>
-    <Param name="expName" val="AP" valType="str" updates="None"/>
+    <Param name="expName" val="AP_practice_withFeedback" valType="str" updates="None"/>
     <Param name="logging level" val="exp" valType="code" updates="None"/>
     <Param name="blendMode" val="avg" valType="str" updates="None"/>
     <Param name="Save excel file" val="True" valType="bool" updates="None"/>

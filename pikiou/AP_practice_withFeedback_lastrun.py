@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy2 Experiment Builder (v1.82.01), Tue Jun 16 14:36:21 2015
+This experiment was created using PsychoPy2 Experiment Builder (v1.82.01), Tue Jun 16 14:59:02 2015
 If you publish work using this script please cite the relevant PsychoPy publications
   Peirce, JW (2007) PsychoPy - Psychophysics software in Python. Journal of Neuroscience Methods, 162(1-2), 8-13.
   Peirce, JW (2009) Generating stimuli for neuroscience using PsychoPy. Frontiers in Neuroinformatics, 2:10. doi: 10.3389/neuro.11.010.2008
@@ -20,7 +20,7 @@ _thisDir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-expName = u'AP'  # from the Builder filename that created this script
+expName = u'AP_practice_withFeedback'  # from the Builder filename that created this script
 expInfo = {u'session': u'001', u'participant': u''}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False: core.quit()  # user pressed cancel
@@ -33,7 +33,7 @@ filename = _thisDir + os.sep + 'data/%s_%s_%s' %(expInfo['participant'], expName
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath='/Users/labuser/git/psychoPyProjects/pikiou/AP.psyexp',
+    originPath=u'/Users/labuser/git/psychoPyProjects/pikiou/AP_practice_withFeedback.psyexp',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 #save a log file for detail verbose info
@@ -162,14 +162,23 @@ image = visual.ImageStim(win=win, name='image',
     flipHoriz=False, flipVert=False,
     texRes=128, interpolate=True, depth=-3.0)
 
+# Initialize components for Routine "feedback"
+feedbackClock = core.Clock()
+feedback='none'
+text_3 = visual.TextStim(win=win, ori=0, name='text_3',
+    text='default text',    font=u'Arial',
+    pos=[0, 0], height=2, wrapWidth=None,
+    color=u'white', colorSpace='rgb', opacity=1,
+    depth=-1.0)
+
 # Create some handy timers
 globalClock = core.Clock()  # to track the time since experiment started
 routineTimer = core.CountdownTimer()  # to track time remaining of each (non-slip) routine 
 
 # set up handler to look after randomisation of conditions etc
-predictabilityBlocks = data.TrialHandler(nReps=1, method='random', 
-    extraInfo=expInfo, originPath='/Users/labuser/git/psychoPyProjects/pikiou/AP.psyexp',
-    trialList=data.importConditions('trialPredictabilityList.xlsx'),
+predictabilityBlocks = data.TrialHandler(nReps=1, method='sequential', 
+    extraInfo=expInfo, originPath=u'/Users/labuser/git/psychoPyProjects/pikiou/AP_practice_withFeedback.psyexp',
+    trialList=data.importConditions(u'trialPredictabilityList.xlsx'),
     seed=None, name='predictabilityBlocks')
 thisExp.addLoop(predictabilityBlocks)  # add the loop to the experiment
 thisPredictabilityBlock = predictabilityBlocks.trialList[0]  # so we can initialise stimuli with some values
@@ -187,7 +196,7 @@ for thisPredictabilityBlock in predictabilityBlocks:
     
     # set up handler to look after randomisation of conditions etc
     taskBlocks = data.TrialHandler(nReps=1, method='random', 
-        extraInfo=expInfo, originPath='/Users/labuser/git/psychoPyProjects/pikiou/AP.psyexp',
+        extraInfo=expInfo, originPath=u'/Users/labuser/git/psychoPyProjects/pikiou/AP_practice_withFeedback.psyexp',
         trialList=[None],
         seed=None, name='taskBlocks')
     thisExp.addLoop(taskBlocks)  # add the loop to the experiment
@@ -258,14 +267,14 @@ for thisPredictabilityBlock in predictabilityBlocks:
         
         elif task=="A_notA":
             if swapResponse:
-                taskText = "Press the ""j"" key if the pattern matches the green line\n Otherwise press the ""f"" "
+                taskText = "Press the ""j"" key if the pattern matches the green line\nOtherwise press the ""f"" "
                 showBlue = 0
                 jText = ""
                 aText = "j"
                 bText = ""
                 print("swapResponse")
             else:
-                taskText = "Press the ""f"" key if the pattern matches the green line\n Otherwise press the ""j"" "
+                taskText = "Press the ""f"" key if the pattern matches the green line\nOtherwise press the ""j"" "
                 showBlue = 0
                 jText = ""
                 aText = "f"
@@ -502,7 +511,7 @@ for thisPredictabilityBlock in predictabilityBlocks:
         
         # set up handler to look after randomisation of conditions etc
         targetRandomization = data.TrialHandler(nReps=10, method='random', 
-            extraInfo=expInfo, originPath='/Users/labuser/git/psychoPyProjects/pikiou/AP.psyexp',
+            extraInfo=expInfo, originPath=u'/Users/labuser/git/psychoPyProjects/pikiou/AP_practice_withFeedback.psyexp',
             trialList=[None],
             seed=None, name='targetRandomization')
         thisExp.addLoop(targetRandomization)  # add the loop to the experiment
@@ -653,6 +662,71 @@ for thisPredictabilityBlock in predictabilityBlocks:
                 targetRandomization.addData('gabor_response.rt', gabor_response.rt)
             # the Routine "gaborTrial" was not non-slip safe, so reset the non-slip timer
             routineTimer.reset()
+            
+            #------Prepare to start Routine "feedback"-------
+            t = 0
+            feedbackClock.reset()  # clock 
+            frameN = -1
+            routineTimer.add(1.000000)
+            # update component parameters for each repeat
+            print gabor_response.keys
+            
+            
+            if gabor_response.keys == correctResponse:
+                feedback='Correct'
+            elif gabor_response.keys==None:
+                feedback='Too Slow'
+            else:
+                feedback='Wrong'
+            
+            text_3.setText(feedback)
+            # keep track of which components have finished
+            feedbackComponents = []
+            feedbackComponents.append(text_3)
+            for thisComponent in feedbackComponents:
+                if hasattr(thisComponent, 'status'):
+                    thisComponent.status = NOT_STARTED
+            
+            #-------Start Routine "feedback"-------
+            continueRoutine = True
+            while continueRoutine and routineTimer.getTime() > 0:
+                # get current time
+                t = feedbackClock.getTime()
+                frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+                # update/draw components on each frame
+                
+                
+                # *text_3* updates
+                if t >= 0.0 and text_3.status == NOT_STARTED:
+                    # keep track of start time/frame for later
+                    text_3.tStart = t  # underestimates by a little under one frame
+                    text_3.frameNStart = frameN  # exact frame index
+                    text_3.setAutoDraw(True)
+                if text_3.status == STARTED and t >= (0.0 + (1.0-win.monitorFramePeriod*0.75)): #most of one frame period left
+                    text_3.setAutoDraw(False)
+                
+                # check if all components have finished
+                if not continueRoutine:  # a component has requested a forced-end of Routine
+                    break
+                continueRoutine = False  # will revert to True if at least one component still running
+                for thisComponent in feedbackComponents:
+                    if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                        continueRoutine = True
+                        break  # at least one component has not yet finished
+                
+                # check for quit (the Esc key)
+                if endExpNow or event.getKeys(keyList=["escape"]):
+                    core.quit()
+                
+                # refresh the screen
+                if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+                    win.flip()
+            
+            #-------Ending Routine "feedback"-------
+            for thisComponent in feedbackComponents:
+                if hasattr(thisComponent, "setAutoDraw"):
+                    thisComponent.setAutoDraw(False)
+            
             thisExp.nextEntry()
             
         # completed 10 repeats of 'targetRandomization'
@@ -667,6 +741,7 @@ for thisPredictabilityBlock in predictabilityBlocks:
     # completed 1 repeats of 'taskBlocks'
     
 # completed 1 repeats of 'predictabilityBlocks'
+
 
 
 
