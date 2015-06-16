@@ -22,6 +22,36 @@
     <Param name="Screen" val="1" valType="num" updates="None"/>
   </Settings>
   <Routines>
+    <Routine name="feedback">
+      <CodeComponent name="code_4">
+        <Param name="Begin Experiment" val="feedback='none'" valType="extendedCode" updates="constant"/>
+        <Param name="name" val="code_4" valType="code" updates="None"/>
+        <Param name="Begin Routine" val="print gabor_response.keys&#10;&#10;&#10;if gabor_response.keys == correctResponse:&#10;    feedback='Correct'&#10;elif gabor_response.keys==None:&#10;    feedback='Too Slow'&#10;else:&#10;    feedback='Wrong'&#10;" valType="extendedCode" updates="constant"/>
+        <Param name="End Routine" val="" valType="extendedCode" updates="constant"/>
+        <Param name="End Experiment" val="" valType="extendedCode" updates="constant"/>
+        <Param name="Each Frame" val="" valType="extendedCode" updates="constant"/>
+      </CodeComponent>
+      <TextComponent name="text_3">
+        <Param name="opacity" val="1" valType="code" updates="constant"/>
+        <Param name="colorSpace" val="rgb" valType="str" updates="constant"/>
+        <Param name="name" val="text_3" valType="code" updates="None"/>
+        <Param name="wrapWidth" val="" valType="code" updates="constant"/>
+        <Param name="color" val="white" valType="str" updates="constant"/>
+        <Param name="text" val="$feedback" valType="str" updates="set every repeat"/>
+        <Param name="stopVal" val="1.0" valType="code" updates="constant"/>
+        <Param name="durationEstim" val="" valType="code" updates="None"/>
+        <Param name="pos" val="[0, 0]" valType="code" updates="constant"/>
+        <Param name="flip" val="" valType="str" updates="constant"/>
+        <Param name="startEstim" val="" valType="code" updates="None"/>
+        <Param name="units" val="from exp settings" valType="str" updates="None"/>
+        <Param name="startType" val="time (s)" valType="str" updates="None"/>
+        <Param name="ori" val="0" valType="code" updates="constant"/>
+        <Param name="stopType" val="duration (s)" valType="str" updates="None"/>
+        <Param name="startVal" val="0.0" valType="code" updates="None"/>
+        <Param name="font" val="Arial" valType="str" updates="constant"/>
+        <Param name="letterHeight" val="2" valType="code" updates="constant"/>
+      </TextComponent>
+    </Routine>
     <Routine name="gaborTrial">
       <CodeComponent name="code">
         <Param name="Begin Experiment" val="&#10;&#10;ISI = 1.5 + 1.5&#10;contrastList =np.linspace(.012,.11,9)&#10;noiseTexture = np.random.rand(512,512)*2.0-1" valType="extendedCode" updates="constant"/>
@@ -352,10 +382,10 @@
       <Param name="name" val="predictabilityBlocks" valType="code" updates="None"/>
       <Param name="isTrials" val="False" valType="bool" updates="None"/>
       <Param name="random seed" val="" valType="code" updates="None"/>
-      <Param name="loopType" val="random" valType="str" updates="None"/>
+      <Param name="loopType" val="sequential" valType="str" updates="None"/>
       <Param name="nReps" val="1" valType="code" updates="None"/>
       <Param name="endPoints" val="[0, 1]" valType="num" updates="None"/>
-      <Param name="conditions" val="[{u'trialPredictability': 1}, {u'trialPredictability': 0.5}, {u'trialPredictability': 0}]" valType="str" updates="None"/>
+      <Param name="conditions" val="[{u'trialPredictability': 0.9}, {u'trialPredictability': 0.5}, {u'trialPredictability': 0.1}]" valType="str" updates="None"/>
       <Param name="Selected rows" val="" valType="str" updates="None"/>
     </LoopInitiator>
     <LoopInitiator loopType="TrialHandler" name="taskBlocks">
@@ -383,6 +413,7 @@
       <Param name="Selected rows" val="" valType="str" updates="None"/>
     </LoopInitiator>
     <Routine name="gaborTrial"/>
+    <Routine name="feedback"/>
     <LoopTerminator name="targetRandomization"/>
     <LoopTerminator name="taskBlocks"/>
     <LoopTerminator name="predictabilityBlocks"/>
