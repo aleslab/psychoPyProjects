@@ -5,7 +5,7 @@
     <Param name="Monitor" val="imac" valType="str" updates="None"/>
     <Param name="Enable Escape" val="True" valType="bool" updates="None"/>
     <Param name="color" val="$[0,0,0]" valType="str" updates="None"/>
-    <Param name="Window size (pixels)" val="[2560, 1440]" valType="code" updates="None"/>
+    <Param name="Window size (pixels)" val="[1440, 900]" valType="code" updates="None"/>
     <Param name="Full-screen window" val="True" valType="bool" updates="None"/>
     <Param name="colorSpace" val="rgb" valType="str" updates="None"/>
     <Param name="Experiment info" val="{u'session': u'001', u'participant': u''}" valType="code" updates="None"/>
@@ -26,8 +26,8 @@
       <CodeComponent name="code">
         <Param name="Begin Experiment" val="&#10;&#10;ISI = 1.5 + 1.5&#10;contrastList =np.linspace(.012,.11,9)&#10;noiseTexture = np.random.rand(512,512)*2.0-1" valType="extendedCode" updates="constant"/>
         <Param name="name" val="code" valType="code" updates="None"/>
-        <Param name="Begin Routine" val="noiseTexture = np.random.rand(512,512)*2.0-1&#10;gC = np.random.choice(contrastList)&#10;gratingColor = [gC, gC, gC]&#10;&#10;#determine if this trial should switch&#10;if random()&lt;trialPredictability:&#10;&#10;    if thisTrialValue == &quot;A&quot;:&#10;        gratingOri = gratingOriB&#10;        thisTrialValue = &quot;B&quot;&#10;    elif thisTrialValue == &quot;B&quot;:&#10;        gratingOri = gratingOriA&#10;        thisTrialValue = &quot;A&quot;&#10;&#10;ISI = random() + 1 + 1.5&#10;&#10;if thisTrialValue == &quot;A&quot;:&#10;    if swapResponse:&#10;        correctResponse = &quot;j&quot;&#10;    else:&#10;        correctResponse = &quot;f&quot;&#10;elif thisTrialValue == &quot;B&quot;:&#10;    if swapResponse:&#10;        correctResponse = &quot;f&quot;&#10;    else:&#10;        correctResponse = &quot;j&quot;&#10;&#10;thisExp.addData('gratingOri', gratingOri)&#10;thisExp.addData('gratingContrast', gC)&#10;thisExp.addData('thisTrialValue', thisTrialValue)&#10;thisExp.addData('task',task)&#10;thisExp.addData('swapResponse',swapResponse)&#10;thisExp.addData('correctResponse',correctResponse)&#10;&#10;&#10;" valType="extendedCode" updates="constant"/>
-        <Param name="End Routine" val="" valType="extendedCode" updates="constant"/>
+        <Param name="Begin Routine" val="noiseTexture = np.random.rand(512,512)*2.0-1&#10;gC = np.random.choice(contrastList)&#10;gratingColor = [gC, gC, gC]&#10;&#10;#determine if this trial should switch&#10;if random()&lt;trialPredictability:&#10;&#10;    if thisTrialValue == &quot;A&quot;:&#10;        gratingOri = gratingOriB&#10;        thisTrialValue = &quot;B&quot;&#10;    elif thisTrialValue == &quot;B&quot;:&#10;        gratingOri = gratingOriA&#10;        thisTrialValue = &quot;A&quot;&#10;&#10;ISI = random() + 1 + 1.5&#10;&#10;if thisTrialValue == &quot;A&quot;:&#10;    if swapResponse:&#10;        correctResponse = &quot;j&quot;&#10;    else:&#10;        correctResponse = &quot;f&quot;&#10;elif thisTrialValue == &quot;B&quot;:&#10;    if swapResponse:&#10;        correctResponse = &quot;f&quot;&#10;    else:&#10;        correctResponse = &quot;j&quot;&#10;&#10;&#10;&#10;thisExp.addData('gratingOri', gratingOri)&#10;thisExp.addData('gratingContrast', gC)&#10;thisExp.addData('thisTrialValue', thisTrialValue)&#10;thisExp.addData('task',task)&#10;thisExp.addData('swapResponse',swapResponse)&#10;thisExp.addData('correctResponse',correctResponse)&#10;&#10;" valType="extendedCode" updates="constant"/>
+        <Param name="End Routine" val="if gabor_response.keys == correctResponse:&#10;    isCorrect=True&#10;else:&#10;    isCorrect=False&#10;&#10;thisExp.addData('isCorrect',isCorrect)" valType="extendedCode" updates="constant"/>
         <Param name="End Experiment" val="" valType="extendedCode" updates="constant"/>
         <Param name="Each Frame" val="" valType="extendedCode" updates="constant"/>
       </CodeComponent>
@@ -44,7 +44,7 @@
         <Param name="allowedKeys" val="'f','j','y','n','left','right','space'" valType="code" updates="constant"/>
         <Param name="stopType" val="duration (s)" valType="str" updates="None"/>
         <Param name="startVal" val="0.0" valType="code" updates="None"/>
-        <Param name="store" val="last key" valType="str" updates="constant"/>
+        <Param name="store" val="first key" valType="str" updates="constant"/>
       </KeyboardComponent>
       <GratingComponent name="grating">
         <Param name="opacity" val="1" valType="code" updates="constant"/>
@@ -364,7 +364,7 @@
       <Param name="isTrials" val="False" valType="bool" updates="None"/>
       <Param name="random seed" val="" valType="code" updates="None"/>
       <Param name="loopType" val="random" valType="str" updates="None"/>
-      <Param name="nReps" val="1" valType="code" updates="None"/>
+      <Param name="nReps" val="24" valType="code" updates="None"/>
       <Param name="endPoints" val="[0, 1]" valType="num" updates="None"/>
       <Param name="conditions" val="None" valType="str" updates="None"/>
       <Param name="Selected rows" val="" valType="str" updates="None"/>
@@ -377,7 +377,7 @@
       <Param name="isTrials" val="True" valType="bool" updates="None"/>
       <Param name="random seed" val="" valType="code" updates="None"/>
       <Param name="loopType" val="random" valType="str" updates="None"/>
-      <Param name="nReps" val="10" valType="code" updates="None"/>
+      <Param name="nReps" val="9" valType="code" updates="None"/>
       <Param name="endPoints" val="[0, 1]" valType="num" updates="None"/>
       <Param name="conditions" val="None" valType="str" updates="None"/>
       <Param name="Selected rows" val="" valType="str" updates="None"/>

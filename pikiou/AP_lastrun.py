@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy2 Experiment Builder (v1.82.01), Tue Jun 16 14:36:21 2015
+This experiment was created using PsychoPy2 Experiment Builder (v1.82.01), Tue Jun 23 13:52:18 2015
 If you publish work using this script please cite the relevant PsychoPy publications
   Peirce, JW (2007) PsychoPy - Psychophysics software in Python. Journal of Neuroscience Methods, 162(1-2), 8-13.
   Peirce, JW (2009) Generating stimuli for neuroscience using PsychoPy. Frontiers in Neuroinformatics, 2:10. doi: 10.3389/neuro.11.010.2008
@@ -20,7 +20,7 @@ _thisDir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-expName = u'AP'  # from the Builder filename that created this script
+expName = 'AP'  # from the Builder filename that created this script
 expInfo = {u'session': u'001', u'participant': u''}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False: core.quit()  # user pressed cancel
@@ -33,7 +33,7 @@ filename = _thisDir + os.sep + 'data/%s_%s_%s' %(expInfo['participant'], expName
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath='/Users/labuser/git/psychoPyProjects/pikiou/AP.psyexp',
+    originPath=u'/Users/ales/git/psychoPyProjects/pikiou/AP.psyexp',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 #save a log file for detail verbose info
@@ -45,8 +45,8 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 # Start Code - component code to be run before the window creation
 
 # Setup the Window
-win = visual.Window(size=(2560, 1440), fullscr=True, screen=0, allowGUI=False, allowStencil=False,
-    monitor=u'imac', color=[0,0,0], colorSpace='rgb',
+win = visual.Window(size=(1440, 900), fullscr=True, screen=0, allowGUI=False, allowStencil=False,
+    monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
     blendMode='avg', useFBO=True,
     units='deg')
 # store frame rate of monitor if we can measure it successfully
@@ -119,14 +119,14 @@ BLabel = visual.TextStim(win=win, ori=0, name='BLabel',
     color='white', colorSpace='rgb', opacity=1,
     depth=-6.0)
 instructionText = visual.TextStim(win=win, ori=0, name='instructionText',
-    text='default text',    font=u'Arial',
+    text='default text',    font='Arial',
     pos=[0, 6], height=0.5, wrapWidth=20,
-    color=u'white', colorSpace='rgb', opacity=1,
+    color='white', colorSpace='rgb', opacity=1,
     depth=-8.0)
 text = visual.TextStim(win=win, ori=0, name='text',
-    text=u'Press Space to Continue',    font=u'Arial',
+    text='Press Space to Continue',    font='Arial',
     pos=[0, -6], height=0.5, wrapWidth=None,
-    color=u'white', colorSpace='rgb', opacity=1,
+    color='white', colorSpace='rgb', opacity=1,
     depth=-9.0)
 
 # Initialize components for Routine "Predictability_Instructions"
@@ -138,9 +138,9 @@ text_5 = visual.TextStim(win=win, ori=0, name='text_5',
     color='white', colorSpace='rgb', opacity=1,
     depth=-1.0)
 text_2 = visual.TextStim(win=win, ori=0, name='text_2',
-    text=u'Press Space to continue',    font=u'Arial',
+    text='Press Space to continue',    font='Arial',
     pos=[0, -6], height=0.5, wrapWidth=None,
-    color=u'white', colorSpace='rgb', opacity=1,
+    color='white', colorSpace='rgb', opacity=1,
     depth=-3.0)
 
 # Initialize components for Routine "gaborTrial"
@@ -168,7 +168,7 @@ routineTimer = core.CountdownTimer()  # to track time remaining of each (non-sli
 
 # set up handler to look after randomisation of conditions etc
 predictabilityBlocks = data.TrialHandler(nReps=1, method='random', 
-    extraInfo=expInfo, originPath='/Users/labuser/git/psychoPyProjects/pikiou/AP.psyexp',
+    extraInfo=expInfo, originPath=u'/Users/ales/git/psychoPyProjects/pikiou/AP.psyexp',
     trialList=data.importConditions('trialPredictabilityList.xlsx'),
     seed=None, name='predictabilityBlocks')
 thisExp.addLoop(predictabilityBlocks)  # add the loop to the experiment
@@ -186,8 +186,8 @@ for thisPredictabilityBlock in predictabilityBlocks:
             exec(paramName + '= thisPredictabilityBlock.' + paramName)
     
     # set up handler to look after randomisation of conditions etc
-    taskBlocks = data.TrialHandler(nReps=1, method='random', 
-        extraInfo=expInfo, originPath='/Users/labuser/git/psychoPyProjects/pikiou/AP.psyexp',
+    taskBlocks = data.TrialHandler(nReps=24, method='random', 
+        extraInfo=expInfo, originPath=u'/Users/ales/git/psychoPyProjects/pikiou/AP.psyexp',
         trialList=[None],
         seed=None, name='taskBlocks')
     thisExp.addLoop(taskBlocks)  # add the loop to the experiment
@@ -258,14 +258,14 @@ for thisPredictabilityBlock in predictabilityBlocks:
         
         elif task=="A_notA":
             if swapResponse:
-                taskText = "Press the ""j"" key if the pattern matches the green line\n Otherwise press the ""f"" "
+                taskText = "Press the ""j"" key if the pattern matches the green line\nOtherwise press the ""f"" "
                 showBlue = 0
                 jText = ""
                 aText = "j"
                 bText = ""
                 print("swapResponse")
             else:
-                taskText = "Press the ""f"" key if the pattern matches the green line\n Otherwise press the ""j"" "
+                taskText = "Press the ""f"" key if the pattern matches the green line\nOtherwise press the ""j"" "
                 showBlue = 0
                 jText = ""
                 aText = "f"
@@ -501,8 +501,8 @@ for thisPredictabilityBlock in predictabilityBlocks:
         routineTimer.reset()
         
         # set up handler to look after randomisation of conditions etc
-        targetRandomization = data.TrialHandler(nReps=10, method='random', 
-            extraInfo=expInfo, originPath='/Users/labuser/git/psychoPyProjects/pikiou/AP.psyexp',
+        targetRandomization = data.TrialHandler(nReps=9, method='random', 
+            extraInfo=expInfo, originPath=u'/Users/ales/git/psychoPyProjects/pikiou/AP.psyexp',
             trialList=[None],
             seed=None, name='targetRandomization')
         thisExp.addLoop(targetRandomization)  # add the loop to the experiment
@@ -551,13 +551,14 @@ for thisPredictabilityBlock in predictabilityBlocks:
                 else:
                     correctResponse = "j"
             
+            
+            
             thisExp.addData('gratingOri', gratingOri)
             thisExp.addData('gratingContrast', gC)
             thisExp.addData('thisTrialValue', thisTrialValue)
             thisExp.addData('task',task)
             thisExp.addData('swapResponse',swapResponse)
             thisExp.addData('correctResponse',correctResponse)
-            
             
             
             gabor_response = event.BuilderKeyResponse()  # create an object of type KeyResponse
@@ -601,8 +602,9 @@ for thisPredictabilityBlock in predictabilityBlocks:
                     if "escape" in theseKeys:
                         endExpNow = True
                     if len(theseKeys) > 0:  # at least one key was pressed
-                        gabor_response.keys = theseKeys[-1]  # just the last key pressed
-                        gabor_response.rt = gabor_response.clock.getTime()
+                        if gabor_response.keys == []:  # then this was the first keypress
+                            gabor_response.keys = theseKeys[0]  # just the first key pressed
+                            gabor_response.rt = gabor_response.clock.getTime()
                 
                 # *grating* updates
                 if t >= 0 and grating.status == NOT_STARTED:
@@ -643,7 +645,12 @@ for thisPredictabilityBlock in predictabilityBlocks:
             for thisComponent in gaborTrialComponents:
                 if hasattr(thisComponent, "setAutoDraw"):
                     thisComponent.setAutoDraw(False)
+            if gabor_response.keys == correctResponse:
+                isCorrect=True
+            else:
+                isCorrect=False
             
+            thisExp.addData('isCorrect',isCorrect)
             # check responses
             if gabor_response.keys in ['', [], None]:  # No response was made
                gabor_response.keys=None
@@ -655,7 +662,7 @@ for thisPredictabilityBlock in predictabilityBlocks:
             routineTimer.reset()
             thisExp.nextEntry()
             
-        # completed 10 repeats of 'targetRandomization'
+        # completed 9 repeats of 'targetRandomization'
         
         # get names of stimulus parameters
         if targetRandomization.trialList in ([], [None], None):  params = []
@@ -664,7 +671,7 @@ for thisPredictabilityBlock in predictabilityBlocks:
         targetRandomization.saveAsExcel(filename + '.xlsx', sheetName='targetRandomization',
             stimOut=params,
             dataOut=['n','all_mean','all_std', 'all_raw'])
-    # completed 1 repeats of 'taskBlocks'
+    # completed 24 repeats of 'taskBlocks'
     
 # completed 1 repeats of 'predictabilityBlocks'
 
